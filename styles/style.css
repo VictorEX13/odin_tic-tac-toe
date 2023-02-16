@@ -1,0 +1,57 @@
+*,
+*::before,
+*:after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    font-size: 10px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Blocks */
+
+main {
+    padding: 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.board {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 5px;
+    height: 360px;
+    width: 360px;
+    background-color: black;
+}
+
+.board-field {
+    background-color: white;
+    text-align: center;
+}
+
+.board-field:hover {
+    background-color: rgb(172, 172, 172);
+}
+
+.board-field:active {
+    background-color: gray;
+}
+
+/* Elements */
+
+.board-field span {
+    font-size: 10rem;
+}
+
+/* Modifiers */
