@@ -3,7 +3,7 @@ const playerFactory = (name, mark) => {
 };
 
 const gameBoard = (() => {
-  const board = [
+  let board = [
     ["", "", ""],
     ["", "", ""],
     ["", "", ""],
@@ -25,10 +25,21 @@ const gameBoard = (() => {
     if (!board[row][column]) {
       board[row][column] = value;
 
+      gameController.highlightCurrentPlayer();
       gameController.checkGameState();
       gameController.switchCurrentPlayer();
       gameController.displayBoard();
     }
+  };
+
+  const resetBoard = () => {
+    board = [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ];
+
+    gameController.resetDisplay();
   };
 
   return {
@@ -39,6 +50,7 @@ const gameBoard = (() => {
     getDiagonalLeftToRight,
     getDiagonalRightToLeft,
     addMarks,
+    resetBoard,
   };
 })();
 
@@ -63,7 +75,23 @@ const gameController = (() => {
     }
   };
 
+  const resetDisplay = () => {
+    for (let i = 0; i < 3; i++) {
+      for (let x = 0; x < 3; x++) {
+        boardFields[3 * i + x].replaceChildren();
+      }
+    }
+  };
+
   const getCurrentPlayer = () => currentPlayer;
+
+  const getPlayer1 = () => player1;
+
+  const getPlayer2 = () => player2;
+
+  const setPlayerName = (player, newName) => {
+    player.name = newName;
+  };
 
   const switchCurrentPlayer = () => {
     if (currentPlayer === player1) {
@@ -73,9 +101,25 @@ const gameController = (() => {
     }
   };
 
+  const displayPlayersMarks = () => {
+    mark1.textContent = player1.mark;
+    mark2.textContent = player2.mark;
+  };
+
+  const swapPlayersMarks = () => {
+    [player1.mark, player2.mark] = [player2.mark, player1.mark];
+
+    switchCurrentPlayer();
+    displayPlayersMarks();
+  };
+
   const checkGameState = () => {
+    let state = 0;
+    let message = "";
+
     if (gameBoard.getBoard().every((arr) => arr.every((i) => i))) {
-      return "Draw!";
+      state = 1;
+      message = "Draw!";
     }
 
     for (let i = 0; i < 3; i++) {
@@ -89,20 +133,69 @@ const gameController = (() => {
           .getDiagonalRightToLeft()
           .every((val, i, arr) => val && val === arr[0])
       ) {
-        return `The winner is ${currentPlayer.name}!!!`;
+        state = 1;
+        message = `The winner is ${currentPlayer.name}!!!`;
       }
     }
+
+    if (state) {
+      displayModal(message);
+    }
+  };
+
+  const closeModal = () => {
+    modal.style.display = "none";
+  };
+
+  const displayModal = (message) => {
+    const modalContent = document.querySelector(".modal-content");
+
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "Play Again";
+
+    const resultMessage = document.createElement("span");
+    resultMessage.textContent = message;
+
+    closeButton.addEventListener("click", () => {
+      gameBoard.resetBoard();
+      closeModal();
+    });
+
+    modalContent.replaceChildren();
+    modalContent.appendChild(resultMessage);
+    modalContent.appendChild(closeButton);
+
+    modal.style.display = "block";
+  };
+
+  const highlightCurrentPlayer = () => {
+    mark1.classList.toggle("current");
+    mark2.classList.toggle("current");
   };
 
   return {
     getCurrentPlayer,
+    setPlayerName,
+    getPlayer1,
+    getPlayer2,
     displayBoard,
     switchCurrentPlayer,
     checkGameState,
+    displayPlayersMarks,
+    swapPlayersMarks,
+    resetDisplay,
+    highlightCurrentPlayer,
   };
 })();
 
+const modal = document.querySelector(".modal");
 const boardFields = [...document.querySelectorAll(".board-field")];
+const mark1 = document.querySelector(".mark-1");
+const mark2 = document.querySelector(".mark-2");
+const resetButton = document.querySelector(".reset");
+const swapButton = document.querySelector(".swap");
+const name1 = document.querySelector(".name-1");
+const name2 = document.querySelector(".name-2");
 
 boardFields.forEach((field) => {
   field.addEventListener("click", () => {
@@ -113,3 +206,21 @@ boardFields.forEach((field) => {
     );
   });
 });
+
+resetButton?.addEventListener("click", () => {
+  gameBoard.resetBoard();
+});
+
+swapButton?.addEventListener("click", () => {
+  gameController.swapPlayersMarks();
+});
+
+name1?.addEventListener("input", (e) => {
+  gameController.setPlayerName(gameController.getPlayer1(), e.target.value);
+});
+
+name2?.addEventListener("input", (e) => {
+  gameController.setPlayerName(gameController.getPlayer2(), e.target.value);
+});
+
+gameController.displayPlayersMarks();

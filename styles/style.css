@@ -12,7 +12,7 @@
 
 body {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     height: 100vh;
     width: 100vw;
@@ -20,10 +20,24 @@ body {
 
 /* Blocks */
 
+aside {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    border-radius: 5px;
+    align-items: center;
+}
+
 main {
     padding: 15px;
     border: 1px solid gray;
     border-radius: 5px;
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .board {
@@ -48,10 +62,83 @@ main {
     background-color: gray;
 }
 
+.game-buttons {
+    display: flex;
+    border: 5px solid gray;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 20vh;
+    left: 40vw;
+    width: 200px;
+    height: 150px;
+    overflow: auto;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    height: 100%;
+    padding: 10px;
+    gap: 20px;
+    text-align: center;
+}
+
+.current {
+    background-color: rgb(197, 197, 255);
+}
+
 /* Elements */
 
 .board-field span {
     font-size: 10rem;
 }
 
+svg {
+    width: 50px;
+}
+
+button {
+    border: none;
+    flex-grow: 1;
+}
+
+button:hover {
+    background-color: rgb(172, 172, 172);
+}
+
+button:active {
+    background-color: gray;
+}
+
+.player-mark {
+    flex: 3 0 150px;
+    width: 250px;
+    border-bottom: 1px solid gray;
+    text-align: center;
+    font-size: 15rem;
+}
+
+.player-name {
+    flex: 1 0 50px;
+}
+
+input {
+    border: none;
+    font-size: 3rem;
+    text-align: center;
+    width: 250px;
+}
+
 /* Modifiers */
+
+.reset {
+    border-right: 5px solid gray;
+}

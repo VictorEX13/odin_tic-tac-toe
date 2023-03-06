@@ -9,18 +9,43 @@
     <script src="/scripts/index.js" defer></script>
 </head>
 <body>
+    <aside class="player-1">
+        <div class="player-mark mark-1 current"></div>
+        <input type="text" class="player-name name-1" />
+    </aside>
+
     <main>
-        <section class="board">
-            <div class="board-field" data-row="0" data-col="0"></div>
-            <div class="board-field" data-row="0" data-col="1"></div>
-            <div class="board-field" data-row="0" data-col="2"></div>
-            <div class="board-field" data-row="1" data-col="0"></div>
-            <div class="board-field" data-row="1" data-col="1"></div>
-            <div class="board-field" data-row="1" data-col="2"></div>
-            <div class="board-field" data-row="2" data-col="0"></div>
-            <div class="board-field" data-row="2" data-col="1"></div>
-            <div class="board-field" data-row="2" data-col="2"></div>
+        <section class="game-board">
+            <div class="board">
+                <div class="board-field" data-row="0" data-col="0"></div>
+                <div class="board-field" data-row="0" data-col="1"></div>
+                <div class="board-field" data-row="0" data-col="2"></div>
+                <div class="board-field" data-row="1" data-col="0"></div>
+                <div class="board-field" data-row="1" data-col="1"></div>
+                <div class="board-field" data-row="1" data-col="2"></div>
+                <div class="board-field" data-row="2" data-col="0"></div>
+                <div class="board-field" data-row="2" data-col="1"></div>
+                <div class="board-field" data-row="2" data-col="2"></div>
+            </div>
+
+            <div class="game-buttons">
+                <button class="reset">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M109.7 160H160c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V64C0 46.3 14.3 32 32 32s32 14.3 32 32v51.2L81.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L109.7 160z"/></svg>
+                </button>
+                <button class="swap">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z"/></svg>
+                </button>
+            </div>
         </section>
     </main>
+
+    <aside class="player-2">
+        <div class="player-mark mark-2"></div>
+        <input type="text" class="player-name name-2" />
+    </aside>
+
+    <div class="modal">
+        <div class="modal-content"></div>
+    </div>
 </body>
 </html>
